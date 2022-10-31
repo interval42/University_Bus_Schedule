@@ -4,8 +4,8 @@ function createWindow () {
   // ウインドウ作成
   //test
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 720,
+    height: 1080,
   })
 
   // index.htmlの内容でウィンドウ表示
