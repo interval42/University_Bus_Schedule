@@ -9,7 +9,7 @@ function createWindow () {
   })
 
   // index.htmlの内容でウィンドウ表示
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('Apps/index.html')
 }
 
 // Electronの初期化完了時に呼ばれる
