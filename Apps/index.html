@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
   <title>TMU Bus Schedule</title>
 </head>
 
@@ -22,24 +22,22 @@
 
   
 
-  <script src="sample.js"></script>
-
   <nav id = "Home" class="navbar brand" style="background-color:#255359;">
     <div class="container">
-      <a class="navbar-brand pl-3" href="#" style="font-size: 3rem;">Home</a>
+      <a class="navbar-brand pl-3" href="index.html" style="font-size: 3rem;">Home</a>
     </div>
   </nav>
 
-  <!-- <section class="text-dark p-5 text-center" style="background-color:#66bab7;">
-    <div class="container" href="/">
-      <a class="navbar-brand pl-3" href="/" style="font-size: 2rem;">豊田行き</a>
-      <ul class="navbar-nav" href="/">
-        <li class="nav-item">
-          <a>次のバス</a>
-        </li>
-      </ul>
-    </div>
-  </section> -->
+  <!-- < section class="text-dark p-5 text-center" style = "background-color:#66bab7;" >
+      <div class="container" href="/">
+        <a class="navbar-brand pl-3" href="/" style="font-size: 2rem;">豊田行き</a>
+        <ul class="navbar-nav" href="/">
+          <li class="nav-item">
+            <a>次のバス</a>
+          </li>
+        </ul>
+      </div>
+  </section > -->
 
 
   <div id = "Hino" class="card text-center rounded-0" style="background-color:#66bab7;">
@@ -47,7 +45,7 @@
       <p class="card-title" style="font-size: 5rem;">日野行き</p>
       <p class="card-text" style="font-size: 2rem;">next bus</p>
       <div id="now_time"></div>
-      <a href="#" class="stretched-link"></a>
+      <a href="SubHino.html" class="stretched-link"></a>
     </div>
   </div>
 
@@ -56,9 +54,11 @@
       <p class="card-title" style="font-size: 5rem;">南大沢行き</p>
       <p class="card-text" style="font-size: 2rem;">next bus</p>
       <div id="bus_time"></div>
-      <a href="#" class="stretched-link"></a>
+      <a href="SubMinami.html" class="stretched-link"></a>
     </div>
   </div>
+
+  <script src="../sample.js"></script>
 
 </body>
 
