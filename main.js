@@ -4,7 +4,7 @@ function createWindow () {
   // ウインドウ作成
   //test
   const mainWindow = new BrowserWindow({
-    width: 720,
+    width: 608,
     height: 1080,
   })
 
