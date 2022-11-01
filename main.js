@@ -2,13 +2,14 @@ const { app, BrowserWindow } = require('electron')
 
 function createWindow () {
   // ウインドウ作成
+  //test
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 608,
+    height: 1080,
   })
 
   // index.htmlの内容でウィンドウ表示
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('Apps/index.html')
 }
 
 // Electronの初期化完了時に呼ばれる
