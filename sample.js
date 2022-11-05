@@ -33,16 +33,16 @@ setNowTime = function() {
   document.getElementById("now_time").innerHTML = nowTime();
 }
 
-setBusTime = function() {
-  document.getElementById("bus_time").innerHTML = busTime();
+setNextHinoTime = function() {
+  document.getElementById("next_hino_time").innerHTML = nowTime();
 }
 
-setDiffTime = function() {
-  document.getElementById("diff_time").innerHTML = diffTime();
+setNextMinamiTime = function() {
+  document.getElementById("next_minami_time").innerHTML = nowTime();
 }
 
+setInterval('setNextHinoTime()',500);
+setInterval('setNextMinamiTime()',500);
 setInterval('setNowTime()',500);
-setBusTime();
-setInterval('setDiffTime()',500);
 
 Resources
