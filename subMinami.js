@@ -194,7 +194,7 @@ setInterval(()=>{
 
   const minamiBusList =  futureMinamiBuses(judge, day, hourMin);
 
-  if(minamiBusList == []){
+  if(minamiBusList.length == 0){
     document.getElementById("next_minami_time").innerHTML = "本日のバスはありません．";
   }
   else{

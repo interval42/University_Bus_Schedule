@@ -192,7 +192,7 @@ setInterval(()=>{
 
   const hinoBusList =  futureHinoBuses(judge, day, hourMin);
 
-  if(hinoBusList == []){
+  if(hinoBusList.length == 0){
     document.getElementById("next_hino_time").innerHTML = "本日のバスはありません．";
   }
   else{
