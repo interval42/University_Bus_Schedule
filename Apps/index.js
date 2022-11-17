@@ -8,6 +8,7 @@ const nowHourMin = function(){
     min = "0" + min
   }
   return Number(hour + min);
+  //return 800;
 }
 
 const nowYearMonthDate = function(){
@@ -190,29 +191,50 @@ setInterval(()=>{
 
   const day = new Date().getDay();
 
-  const hinoBusList =  futureHinoBuses(judge, day, hourMin);
+  const hinoBusList =  futureMinamiBuses(judge, day, hourMin);
 
   if(hinoBusList.length == 0){
-    document.getElementById("next_hino_time").innerHTML = "本日のバスはありません．";
+    document.getElementById("nextHinoCountdown").innerHTML = "本日のバスはもうありません";
   }
   else{
-    document.getElementById("next_hino_time").innerHTML = "あと" + timeSubtract(hinoBusList[0],hourMin);
+    //8:35のような時刻を08:35にして表示するための変換
+    if (hinoBusList[0] < 1000){
+      hinoTime = "0" + hinoBusList[0].toString();
+    }
+    else{
+      hinoTime = hinoBusList[0].toString()
+    }
+    
+    document.getElementById("nextHinoHour").innerHTML = hinoTime.slice(0,2);//時   
+    document.getElementById("colonHino").innerHTML = ":";//：    
+    document.getElementById("nextHinoMinute").innerHTML = hinoTime.slice(-2);//分
+    document.getElementById("nextHinoCountdown").innerHTML = "あと" + timeSubtract(hinoBusList[0],hourMin);//残り時間
   }
 
-},1000);
+},1);
 
 setInterval(()=>{
   const hourMin = nowHourMin();
 
   const day = new Date().getDay();
 
-  const minamiBusList =  futureMinamiBuses(judge, day, hourMin);
+  const minamiBusList =  futureHinoBuses(judge, day, hourMin);
 
   if(minamiBusList.length == 0){
-    document.getElementById("next_minami_time").innerHTML = "本日のバスはありません．";
+    document.getElementById("nextMinamiCountdown").innerHTML = "本日のバスはもうありません";
   }
   else{
-    document.getElementById("next_minami_time").innerHTML = "あと" + timeSubtract(minamiBusList[0],hourMin);
+    //8:35のような時刻を08:35にして表示するための変換
+    if (minamiBusList[0] < 1000){
+      minamiTime = "0" + minamiBusList[0].toString();
+    }
+    else{
+      minamiTime = minamiBusList[0].toString()
+    }
+    document.getElementById("nextMinamiHour").innerHTML = minamiTime.slice(0,2);//時
+    document.getElementById("colonMinami").innerHTML = ":";//： 
+    document.getElementById("nextMinamiMinute").innerHTML = minamiTime.slice(-2);//分
+    document.getElementById("nextMinamiCountdown").innerHTML = "あと" + timeSubtract(minamiBusList[0],hourMin);//残り時間
   }
 
-},1000);
+},1);
