@@ -8,6 +8,7 @@ const nowHourMin = function(){
     min = "0" + min
   }
   return Number(hour + min);
+  //return 1810;
 }
 
 const nowYearMonthDate = function(){
@@ -81,54 +82,6 @@ const judgeSpecialDays = function(yearMonthDate){
   return "2"
 }
 
-const futureHinoBuses = function(judge, day, hourMin){
-  // 引数:judgeSpecialDays関数の返り値, Number型の曜日, Number型の時分
-  // 返り値:hourMin以降の日野のバススケジュールの配列
-
-  const makeupFromHino = [835,950,1220,1350,1520,1630,1830];
-  const normalFromHino = [750,835,910,950,1030,1220,1300,1350,1435,1520,1620,1630,1800,1830];
-  const wedFromHino = [750,835,840,910,945,950,1030,1055,1220,1250,1300,1350,1435,1440,1520,1620,1630,1800,1805,1830];
-  const thuFromHino = [750,835,910,950,1030,1220,1250,1300,1350,1435,1440,1520,1620,1630,1800,1805,1830];
-
-  if(judge == "0"){
-    return [];
-  }
-
-  if(judge == "1"){
-    for(let i; i < makeupFromHino.length; i++){
-      if(hourMin <= makeupFromHino[i]){
-        return makeupFromHino.slice(i)
-      }
-    }
-  }
-
-  if(judge == "2"){
-    if(day == 3){
-      for(let i = 0; i < wedFromHino.length; i++){
-        if(hourMin <= wedFromHino[i]){
-          return wedFromHino.slice(i)
-        }
-      }
-    }
-    if(day == 4){
-      for(let i = 0; i < thuFromHino.length; i++){
-        if(hourMin <= thuFromHino[i]){
-          return thuFromHino.slice(i)
-        }
-      }
-    }
-    if(day == 1 || day == 2 || day == 5){
-      for(let i = 0; i < normalFromHino.length; i++){
-        if(hourMin <= normalFromHino[i]){
-          return normalFromHino.slice(i)
-        }
-      }
-    }
-  }
-
-  return [];
-}
-
 const futureMinamiBuses = function(judge, day, hourMin){
   // 引数:judgeSpecialDays関数の返り値, Number型の曜日, Number型の時分
   // 返り値:hourMin以降の南大沢のバススケジュールの配列
@@ -190,14 +143,50 @@ setInterval(()=>{
 
   const day = new Date().getDay();
 
-  const hinoBusList =  futureHinoBuses(judge, day, hourMin);
+  const hinoBusList =  futureMinamiBuses(judge, day, hourMin);
+  
+  //8:35のような時刻を08:35にして表示するための変換
+  hinoTime=[];
+  for (let i = 0; i < hinoBusList.length; i++){
+    if (hinoBusList[i] < 1000){
+      hinoTime[i] = "0" + hinoBusList[i].toString();
+    }
+    else{
+      hinoTime[i] = hinoBusList[i].toString()
+    }
+  }
 
   if(hinoBusList.length == 0){
-    document.getElementById("next_hino_time").innerHTML = "本日のバスはありません．";
+    document.getElementById("nextHinoCountdown").innerHTML = "本日のバスはもうありません";
   }
   else{
-    document.getElementById("next_hino_time").innerHTML = "あと" + timeSubtract(hinoBusList[0],hourMin);
+    document.getElementById("nextHinoHour").innerHTML = hinoTime[0].slice(0,2);
+    document.getElementById("colonHino").innerHTML = ":";
+    document.getElementById("nextHinoMinute").innerHTML = hinoTime[0].slice(-2);
+    document.getElementById("nextHinoCountdown").innerHTML = "あと" + timeSubtract(hinoBusList[0],hourMin);
   }
 
-},1000);
+  if(hinoBusList.length == 1){
+    document.getElementById("nextHinoCountdown1").innerHTML = "最終便となります";
+  }
+  else{
+    document.getElementById("divider1").innerHTML = "=====";
+    document.getElementById("nextHinoHour1").innerHTML = hinoTime[1].slice(0,2);
+    document.getElementById("colonHino1").innerHTML = ":";
+    document.getElementById("nextHinoMinute1").innerHTML = hinoTime[1].slice(-2);
+    document.getElementById("nextHinoCountdown1").innerHTML = "あと" + timeSubtract(hinoBusList[1],hourMin);
+  }
+
+  if(hinoBusList.length == 2){
+    document.getElementById("nextHinoCountdown2").innerHTML = "最終便となります";
+  }
+  else if (hinoBusList.length >= 3){
+    document.getElementById("divider2").innerHTML = "=====";
+    document.getElementById("nextHinoHour2").innerHTML = hinoTime[2].slice(0,2);
+    document.getElementById("colonHino2").innerHTML = ":";
+    document.getElementById("nextHinoMinute2").innerHTML = hinoTime[2].slice(-2);
+    document.getElementById("nextHinoCountdown2").innerHTML = "あと" + timeSubtract(hinoBusList[2],hourMin);
+  }
+
+},1);
 
