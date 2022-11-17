@@ -8,6 +8,7 @@ const nowHourMin = function(){
     min = "0" + min
   }
   return Number(hour + min);
+  //return 1800;
 }
 
 const nowYearMonthDate = function(){
@@ -129,54 +130,6 @@ const futureHinoBuses = function(judge, day, hourMin){
   return [];
 }
 
-const futureMinamiBuses = function(judge, day, hourMin){
-  // 引数:judgeSpecialDays関数の返り値, Number型の曜日, Number型の時分
-  // 返り値:hourMin以降の南大沢のバススケジュールの配列
-
-  const makeupFromMinami = [745,910,1020,1300,1440,1555,1730];
-  const normalFromMinami = [745,840,910,950,1020,1210,1300,1350,1440,1525,1555,1710,1730,1845];
-  const wedFromMinami = [740,745,840,910,915,950,1020,1025,1210,1215,1345,1300,1350,1440,1525,1530,1555,1700,1710,1730,1845];
-  const thuFromMinami = [745,840,910,950,1020,1210,1215,1345,1300,1350,1440,1525,1530,1555,1700,1710,1730,1845];
-
-  if(judge == "0"){
-    return [];
-  }
-  
-  if(judge == "1"){
-    for(let i = 0; i < makeupFromMinami.length; i++){
-      if(hourMin <= makeupFromMinami[i]){
-        return makeupFromMinami.slice(i)
-      }
-    }
-  }
-
-  if(judge == "2"){
-    if(day == 3){
-      for(let i = 0; i < wedFromMinami.length; i++){
-        if(hourMin <= wedFromMinami[i]){
-          return wedFromMinami.slice(i)
-        }
-      }
-    }
-    if(day == 4){
-      for(let i = 0; i < thuFromMinami.length; i++){
-        if(hourMin <= thuFromMinami[i]){
-          return thuFromMinami.slice(i)
-        }
-      }
-    }
-    if(day == 1 || day == 2 || day == 5){
-      for(let i = 0; i < normalFromMinami.length; i++){
-        if(hourMin <= normalFromMinami[i]){
-          return normalFromMinami.slice(i)
-        }
-      }
-    }
-  }
-
-  return []
-}
-
 
 /*----------------------------------------------------------------------------- */
 
@@ -192,13 +145,49 @@ setInterval(()=>{
 
   const day = new Date().getDay();
 
-  const minamiBusList =  futureMinamiBuses(judge, day, hourMin);
+  const minamiBusList =  futureHinoBuses(judge, day, hourMin);
+
+  //8:35のような時刻を08:35にして表示するための変換
+  minamiTime=[];
+  for (let i = 0; i < minamiBusList.length; i++){
+    if (minamiBusList[i] < 1000){
+      minamiTime[i] = "0" + minamiBusList[i].toString();
+    }
+    else{
+      minamiTime[i] = minamiBusList[i].toString()
+    }
+  }
 
   if(minamiBusList.length == 0){
-    document.getElementById("next_minami_time").innerHTML = "本日のバスはありません．";
+    document.getElementById("nextMinamiCountdown").innerHTML = "本日のバスはもうありません";
   }
   else{
-    document.getElementById("next_minami_time").innerHTML = "あと" + timeSubtract(minamiBusList[0],hourMin);
+    document.getElementById("nextMinamiHour").innerHTML = minamiTime[0].slice(0,2);
+    document.getElementById("colonMinami").innerHTML = ":";
+    document.getElementById("nextMinamiMinute").innerHTML = minamiTime[0].slice(-2);
+    document.getElementById("nextMinamiCountdown").innerHTML = "あと" + timeSubtract(minamiBusList[0],hourMin);
   }
 
-},1000);
+  if(minamiBusList.length == 1){
+    document.getElementById("nextMinamiCountdown1").innerHTML = "最終便となります";
+  }
+  else{
+    document.getElementById("divider1").innerHTML = "=====";
+    document.getElementById("nextMinamiHour1").innerHTML = minamiTime[1].slice(0,2);
+    document.getElementById("colonMinami1").innerHTML = ":";
+    document.getElementById("nextMinamiMinute1").innerHTML = minamiTime[1].slice(-2);
+    document.getElementById("nextMinamiCountdown1").innerHTML = "あと" + timeSubtract(minamiBusList[1],hourMin);
+  }
+
+  if(minamiBusList.length == 2){
+    document.getElementById("nextMinamiCountdown2").innerHTML = "最終便となります";
+  }
+  else if (minamiBusList.length >= 3){
+    document.getElementById("divider2").innerHTML = "=====";
+    document.getElementById("nextMinamiHour2").innerHTML = minamiTime[2].slice(0,2);
+    document.getElementById("colonMinami2").innerHTML = ":";
+    document.getElementById("nextMinamiMinute2").innerHTML = minamiTime[2].slice(-2);
+    document.getElementById("nextMinamiCountdown2").innerHTML = "あと" + timeSubtract(minamiBusList[2],hourMin);
+  }
+
+},1);
