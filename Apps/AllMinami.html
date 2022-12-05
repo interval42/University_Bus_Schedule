@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link href="https://www.fontzip.com/storage/2018/09/27/pingfang-sc-regular/webfonts/PingFang SC Regular.css" rel="stylesheet" /><style>body{font-family:'PingFang SC Regular'}</style>
+  <title>TMU Bus Schedule</title>
+</head>
+
+<body>
+  
+
+  <nav id = "Home" class="navbar brand" style="background-color:#255359;">
+    <div class="container">
+      <a class="navbar-brand pl-3" href="index.html" style="font-size: 3rem;">Home</a>
+      <a href="index.html" class="stretched-link"></a>
+    </div>
+  </nav>
+
+  <div id = "MinamiSub" class="card text-center rounded-0" style="background-color:#81C7D4;">
+    <div class="card-body">
+      <p class="card-title" style="font-size: 4rem;">日野 ⇒ 南大沢</p>
+      <p class="card-text" style="font-size: 2rem;">この日のバス</p>
+
+      <div class="row justify-content-center">
+        <div class="col-2 col-sm-4 text-end">
+          <p id = "nextMinamiHour" style="font-size: 4rem;"></p>
+        </div>
+        <div class="col-1">
+          <p id = "colonMinami" style="font-size: 3.5rem;"></p>
+        </div>
+        <div class="col-2 col-sm-4 text-start">
+          <p id = "nextMinamiMinute" style="font-size: 4rem;"></p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <script src="subMinami.js"></script>
+
+</body>
+
+</html>
