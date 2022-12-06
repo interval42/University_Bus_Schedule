@@ -73,14 +73,25 @@
       <form method="post">
         <div>
           <select name="where">
-            <option value="">選択してください</option>
             <option value="goHino">南大沢→日野</option>
             <option value="goMinami">日野→南大沢</option>
           </select>
         </div>
       </form>
-      <p style="font-size: 2rem; color:#3265b1;">検索</p>
+      <p style="font-size: 2rem; color:#3265b1;" onclick="clickDisplayAlert()">検索</p>
     </div>
+ 
+    <script>
+        function clickDisplayAlert() {
+          let select = document.querySelector('[name="where"]');
+          if(select.selectedIndex === 0) {
+            location.href = 'AllHino.html';
+          } else {
+            location.href = "AllMinami.html";
+          }
+        }
+    </script>    
+
   </nav>
 
   <script src="index.js"></script>
