@@ -18,10 +18,10 @@
     </div>
   </nav>
 
-  <nav id = "" class="card text-center rounded-0" style="background-color:#66bab7;">
+  <nav id = "SelectDate" class="card text-center rounded-0" style="background-color:#66bab7;">
     <div class="card-body">
 
-      <p class="navbar-brand pl-3" style="font-size: 2rem;">日付</p>
+      <p class="navbar-brand pl-3" style="font-size: 3rem;">日付</p>
 
       <!-- 以下、日付入力のコピペ -->
       <select name="year" id="id_year">
@@ -67,32 +67,37 @@
     </div>
   </nav>
 
-  <nav id = "Decide" class="card text-center rounded-0" style="background-color:#81C7D4;">
-    <div class="container">
-      <p class="navbar-brand pl-3" style="font-size: 2rem;">行き先</p>
+  <nav id = "SelectBus" class="card text-center rounded-0" style="background-color:#81C7D4;">
+    <div class="card-body">
+      <p class="navbar-brand pl-3" style="font-size: 3rem;">行き先</p>
       <form method="post">
         <div>
-          <select name="where">
+          <select name="where" style="width:150px; height:40px;">
             <option value="goHino">南大沢→日野</option>
             <option value="goMinami">日野→南大沢</option>
           </select>
         </div>
       </form>
-      <p style="font-size: 2rem; color:#3265b1;" onclick="clickDisplayAlert()">検索</p>
     </div>
- 
-    <script>
-        function clickDisplayAlert() {
-          let select = document.querySelector('[name="where"]');
-          if(select.selectedIndex === 0) {
-            location.href = 'AllHino.html';
-          } else {
-            location.href = "AllMinami.html";
-          }
-        }
-    </script>    
-
   </nav>
+ 
+  <nav id = "Decide" class="card text-center rounded-0" style="background-color:#255359;">
+    <div class="card-body">
+      <p style="margin: auto; cursor: pointer; font-size: 3rem;" onclick="clickDisplayAlert()">検索</p>
+    </div>
+
+    <script>
+      function clickDisplayAlert() {
+        let select = document.querySelector('[name="where"]');
+        if(select.selectedIndex === 0) {
+          location.href = 'AllHino.html';
+        } else {
+          location.href = "AllMinami.html";
+        }
+      }
+    </script> 
+  </nav>
+
 
   <script src="index.js"></script>
 

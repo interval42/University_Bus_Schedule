@@ -18,6 +18,25 @@
     min-height: 90vh;
 }
 
+#SelectDate {
+    min-height: 40vh;
+}
+
+#SelectBus {
+    min-height: 40vh;
+    display: flex;
+    align-items: space-around;
+}
+
+#Decide {
+    min-height: 10vh;
+}
+
+#container {
+    display: flex;
+    justify-content: space-between;
+  }
+
 /* body {
     font-family: kozuka-gothic-pro, sans-serif;
     font-style: light;
