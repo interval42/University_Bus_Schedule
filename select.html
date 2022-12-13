@@ -56,7 +56,7 @@
       };
 
         /*関数設定（スタート数字[必須]、終了数字[必須]、表示id名[省略可能]、デフォルト数字[省略可能]）*/
-        optionLoop(1950, this_year, 'id_year', this_year);
+        optionLoop(this_year, this_year+1, 'id_year', this_year);
         optionLoop(1, 12, 'id_month', this_month);
         optionLoop(1, 31, 'id_day', this_day);
       })();

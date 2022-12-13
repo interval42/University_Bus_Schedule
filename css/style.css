@@ -24,8 +24,6 @@
 
 #SelectBus {
     min-height: 40vh;
-    display: flex;
-    align-items: space-around;
 }
 
 #Decide {
