@@ -19,14 +19,14 @@
 }
 
 #SelectDate {
-    min-height: 80vh;
+    min-height: 90vh;
 }
 
-/* #SelectBus {
-    min-height: 40vh;
-} */
+#PlaceHolder {
+    min-height: 10vh;
+}
 
-#Decide {
+#DecideButton {
     min-height: 10vh;
 }
 
@@ -49,6 +49,16 @@
     display: flex;
     justify-content: space-between;
   }
+
+select {
+  background-color: #81C7D4;
+  border: none;
+  color: black;
+  font-size: 1.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  outline: none;
+}
 
 /* body {
     font-family: kozuka-gothic-pro, sans-serif;

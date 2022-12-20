@@ -12,12 +12,12 @@
 
 <body>
 
-  <nav id = "Home" class="navbar brand" style="background-color:#389eac;">
+  <nav id = "Home" class="navbar brand" style="background-color:#255359;">
     <div class="container">
       <a class="navbar-brand pl-3" href="index.html" style="font-size: 3rem;">Home</a>
-      <nav id = "Decide" class="card text-center rounded-0" style="background-color:#389eac;">
+      <!-- <nav id = "Decide" class="card text-center rounded-0" style="background-color:#389eac;">
         <div class="card-body">
-          <p style="margin: auto; cursor: pointer; font-size: 3rem;" onclick="clickDisplayAlert()">検索</p>
+          <p style="margin: auto; cursor: pointer; font-size: 2rem;" onclick="clickDisplayAlert()">検索</p>
         </div>
     
         <script>
@@ -30,24 +30,33 @@
             }
           }
         </script> 
-      </nav>
+      </nav> -->
+      
+      <a class="navbar-brand pl-3" style="cursor: pointer; font-size: 2.5rem;" onclick="clickDisplayAlert()">検索</a>
+      <script>
+        function clickDisplayAlert() {
+          let select = document.querySelector('[name="where"]');
+          if(select.selectedIndex === 0) {
+            location.href = 'AllHino.html';
+          } else {
+            location.href = "AllMinami.html";
+          }
+        }
+      </script> 
+      
     </div>
   </nav>
 
   <div id = "SelectDate" class="container-fluid text-center" style="background-color:#66bab7;">
-    <div class="row">
-    <!-- <nav id = "SelectDate" class="card text-center rounded-0" style="background-color:#66bab7;"> -->
-      
+    <div id = "PlaceHolder" class = "row"></div>
+    <div class="row">     
       <div class="col-6">
-
         <p style="font-size: 3rem;">日付</p>
-
-        <!-- 以下、日付入力のコピペ -->
-        <select name="year" id="id_year">
+        <select name="year" id="id_year" style="width:7rem; height:3rem;">
         </select>
-        <select name="month" id="id_month">
+        <select name="month" id="id_month" style="width:4rem; height:3rem;">
         </select>
-        <select name="day" id="id_day">
+        <select name="day" id="id_day" style="width:4rem; height:3rem;">
         </select>
         <script>
         (function() {
@@ -81,41 +90,36 @@
         })();
 
         </script>
-        <!-- 以上、日付入力のコピペ -->
-
       </div>
-
       <div class="col-6">
         <p style="font-size: 3rem;">行き先</p>
-          <form method="post">
-            <div>
-              <select name="where" style="width:150px; height:40px;">
-                <option value="goHino">南大沢→日野</option>
-                <option value="goMinami">日野→南大沢</option>
-              </select>
-            </div>
-          </form>
+        <form method="post">
+          <div>
+            <select name="where" style="width:10rem; height:3rem;">
+              <option value="goHino">南大沢→日野</option>
+              <option value="goMinami">日野→南大沢</option>
+            </select>           
+          </div>
+        </form>
       </div>
-    </div>  
-
-    <!-- </nav> -->
-  </div>
-
-  <!-- <nav id = "SelectBus" class="card text-center rounded-0" style="background-color:#81C7D4;">
-    <div class="card-body">
-      <p class="navbar-brand pl-3" style="font-size: 3rem;">行き先</p>
-      <form method="post">
-        <div>
-          <select name="where" style="width:150px; height:40px;">
-            <option value="goHino">南大沢→日野</option>
-            <option value="goMinami">日野→南大沢</option>
-          </select>
-        </div>
-      </form>
+    </div> 
+    <div id = "PlaceHolder" class = "row"></div> 
+    <div class = "row justify-content-center">
+      <div  class = "col-3 rounded" style="cursor: pointer; font-size: 2.5rem; background-color:#81C7D4;" onclick="clickDisplayAlert()">検索</div>
+      <script>
+        function clickDisplayAlert() {
+          let select = document.querySelector('[name="where"]');
+          if(select.selectedIndex === 0) {
+            location.href = 'AllHino.html';
+          } else {
+            location.href = "AllMinami.html";
+          }
+        }
+      </script> 
     </div>
-  </nav> -->
- 
-  <nav id = "Decide" class="card text-center rounded-0" style="background-color:#255359;">
+  </div>
+  
+  <!-- <nav id = "DecideButton" class="card text-center rounded-0" style="background-color:#255359;">
     <div class="card-body">
       <p style="margin: auto; cursor: pointer; font-size: 3rem;" onclick="clickDisplayAlert()">検索</p>
     </div>
@@ -130,7 +134,7 @@
         }
       }
     </script> 
-  </nav>
+  </nav> -->
 
 
   <script src="index.js"></script>
