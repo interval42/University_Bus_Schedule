@@ -34,12 +34,13 @@
     </div>
   </nav>
 
-  <div class="container">
-    <nav id = "SelectDate" class="card text-center rounded-0" style="background-color:#66bab7;">
+  <div id = "SelectDate" class="container-fluid text-center" style="background-color:#66bab7;">
+    <div class="row">
+    <!-- <nav id = "SelectDate" class="card text-center rounded-0" style="background-color:#66bab7;"> -->
       
       <div class="col-6">
 
-        <p class="navbar-brand pl-3" style="font-size: 3rem;">日付</p>
+        <p style="font-size: 3rem;">日付</p>
 
         <!-- 以下、日付入力のコピペ -->
         <select name="year" id="id_year">
@@ -85,7 +86,7 @@
       </div>
 
       <div class="col-6">
-        <p class="navbar-brand pl-3" style="font-size: 3rem;">行き先</p>
+        <p style="font-size: 3rem;">行き先</p>
           <form method="post">
             <div>
               <select name="where" style="width:150px; height:40px;">
@@ -95,9 +96,9 @@
             </div>
           </form>
       </div>
-      
+    </div>  
 
-    </nav>
+    <!-- </nav> -->
   </div>
 
   <!-- <nav id = "SelectBus" class="card text-center rounded-0" style="background-color:#81C7D4;">
