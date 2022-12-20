@@ -19,16 +19,31 @@
 }
 
 #SelectDate {
-    min-height: 40vh;
+    min-height: 80vh;
 }
 
-#SelectBus {
+/* #SelectBus {
     min-height: 40vh;
-}
+} */
 
 #Decide {
     min-height: 10vh;
 }
+
+#card-parent{
+    display: flex;
+    justify-content: space-between;
+}
+
+#card-body{
+    color: #fff;
+    border: solid 1px #fff;
+    text-align: center;
+    line-height: 100px;
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+   }
 
 #container {
     display: flex;

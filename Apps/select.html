@@ -12,62 +12,95 @@
 
 <body>
 
-  <nav id = "Home" class="navbar brand" style="background-color:#255359;">
+  <nav id = "Home" class="navbar brand" style="background-color:#389eac;">
     <div class="container">
       <a class="navbar-brand pl-3" href="index.html" style="font-size: 3rem;">Home</a>
-    </div>
-  </nav>
-
-  <nav id = "SelectDate" class="card text-center rounded-0" style="background-color:#66bab7;">
-    <div class="card-body">
-
-      <p class="navbar-brand pl-3" style="font-size: 3rem;">日付</p>
-
-      <!-- 以下、日付入力のコピペ -->
-      <select name="year" id="id_year">
-      </select>
-      <select name="month" id="id_month">
-      </select>
-      <select name="day" id="id_day">
-      </select>
-      <script>
-      (function() {
-        'use strict';
-      
-        /*今日の日付データを変数todayに格納*/
-        var optionLoop, this_day, this_month, this_year, today;
-        today = new Date();
-        this_year = today.getFullYear();
-        this_month = today.getMonth() + 1;
-        this_day = today.getDate();
-      
-        /*ループ処理（スタート数字、終了数字、表示id名、デフォルト数字）*/
-        optionLoop = function(start, end, id, this_day) {
-          var i, opt;
-          opt = null;
-        for (i = start; i <= end ; i++) {
-          if (i === this_day) {
-            opt += "<option value='" + i + "' selected>" + i + "</option>";
-          } else {
-            opt += "<option value='" + i + "'>" + i + "</option>";
+      <nav id = "Decide" class="card text-center rounded-0" style="background-color:#389eac;">
+        <div class="card-body">
+          <p style="margin: auto; cursor: pointer; font-size: 3rem;" onclick="clickDisplayAlert()">検索</p>
+        </div>
+    
+        <script>
+          function clickDisplayAlert() {
+            let select = document.querySelector('[name="where"]');
+            if(select.selectedIndex === 0) {
+              location.href = 'AllHino.html';
+            } else {
+              location.href = "AllMinami.html";
+            }
           }
-        }
-        return document.getElementById(id).innerHTML = opt;
-      };
-
-        /*関数設定（スタート数字[必須]、終了数字[必須]、表示id名[省略可能]、デフォルト数字[省略可能]）*/
-        optionLoop(this_year, this_year+1, 'id_year', this_year);
-        optionLoop(1, 12, 'id_month', this_month);
-        optionLoop(1, 31, 'id_day', this_day);
-      })();
-
-      </script>
-      <!-- 以上、日付入力のコピペ -->
-
+        </script> 
+      </nav>
     </div>
   </nav>
 
-  <nav id = "SelectBus" class="card text-center rounded-0" style="background-color:#81C7D4;">
+  <div class="container">
+    <nav id = "SelectDate" class="card text-center rounded-0" style="background-color:#66bab7;">
+      
+      <div class="col-6">
+
+        <p class="navbar-brand pl-3" style="font-size: 3rem;">日付</p>
+
+        <!-- 以下、日付入力のコピペ -->
+        <select name="year" id="id_year">
+        </select>
+        <select name="month" id="id_month">
+        </select>
+        <select name="day" id="id_day">
+        </select>
+        <script>
+        (function() {
+          'use strict';
+        
+          /*今日の日付データを変数todayに格納*/
+          var optionLoop, this_day, this_month, this_year, today;
+          today = new Date();
+          this_year = today.getFullYear();
+          this_month = today.getMonth() + 1;
+          this_day = today.getDate();
+        
+          /*ループ処理（スタート数字、終了数字、表示id名、デフォルト数字）*/
+          optionLoop = function(start, end, id, this_day) {
+            var i, opt;
+            opt = null;
+          for (i = start; i <= end ; i++) {
+            if (i === this_day) {
+              opt += "<option value='" + i + "' selected>" + i + "</option>";
+            } else {
+              opt += "<option value='" + i + "'>" + i + "</option>";
+            }
+          }
+          return document.getElementById(id).innerHTML = opt;
+        };
+
+          /*関数設定（スタート数字[必須]、終了数字[必須]、表示id名[省略可能]、デフォルト数字[省略可能]）*/
+          optionLoop(this_year, this_year+1, 'id_year', this_year);
+          optionLoop(1, 12, 'id_month', this_month);
+          optionLoop(1, 31, 'id_day', this_day);
+        })();
+
+        </script>
+        <!-- 以上、日付入力のコピペ -->
+
+      </div>
+
+      <div class="col-6">
+        <p class="navbar-brand pl-3" style="font-size: 3rem;">行き先</p>
+          <form method="post">
+            <div>
+              <select name="where" style="width:150px; height:40px;">
+                <option value="goHino">南大沢→日野</option>
+                <option value="goMinami">日野→南大沢</option>
+              </select>
+            </div>
+          </form>
+      </div>
+      
+
+    </nav>
+  </div>
+
+  <!-- <nav id = "SelectBus" class="card text-center rounded-0" style="background-color:#81C7D4;">
     <div class="card-body">
       <p class="navbar-brand pl-3" style="font-size: 3rem;">行き先</p>
       <form method="post">
@@ -79,7 +112,7 @@
         </div>
       </form>
     </div>
-  </nav>
+  </nav> -->
  
   <nav id = "Decide" class="card text-center rounded-0" style="background-color:#255359;">
     <div class="card-body">
