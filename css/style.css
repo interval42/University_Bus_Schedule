@@ -18,13 +18,18 @@
     min-height: 90vh;
 }
 
-/* body {
+body {
     font-family: kozuka-gothic-pro, sans-serif;
     font-style: light;
     font-weight: 200;
-} */
-
-html {
-    font-size: 2.4vw;
 }
 
+:root {
+    --max-font-size: 22px;
+}
+  
+html {
+    font-size: min(2.4vw, var(--max-font-size));
+}
+  
+  
