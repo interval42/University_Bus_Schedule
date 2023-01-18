@@ -17,31 +17,22 @@
     <div class="container">
       <a class="navbar-brand pl-3" href="index.html" style="font-size: 3rem;">Home</a>
       <a class="navbar-brand pl-3" href="select.html" style="font-size: 3rem;">戻る</a>
-      <!-- <a href="index.html" class="stretched-link"></a> -->
+      
     </div>
   </nav>
 
   <div id = "AllHino" class="card text-center rounded-0" style="background-color:#66bab7;">
     <div class="card-body">
         <p class="card-title" style="font-size: 4rem;">南大沢 ⇒ 日野</p>
-        <p class="card-text" style="font-size: 2rem;">この日のバス</p>
+        <p id="hinoJudge" class="card-text" style="font-size: 2rem;"></p>
         
-        <div class="row justify-content-center">
-          <div class="col-2 col-sm-4 text-end">
-            <p id = "nextHinoHour" style="font-size: 4rem;"></p>
-          </div>
-          <div class="col-1">
-            <p id = "colonHino" style="font-size: 3.5rem;"></p>
-          </div>
-          <div class="col-2 col-sm-4 text-start">
-            <p id = "nextHinoMinute" style="font-size: 4rem;"></p>
-          </div>
-        </div>
+        <div id="timeContainer"></div>
       
     </div>
   </div>
 
-  <script src="subHino.js"></script>
+  
+  <script src="AllHino.js"></script>
 
 </body>
 
