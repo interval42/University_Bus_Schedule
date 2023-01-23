@@ -1,41 +1,3 @@
-const nowHourMin = function () {
-    // 返り値:現在時刻をNumber型の時分にして返す
-    // 例: 現在時刻が13時45分ならnowHourMin() -> 1345
-    const now = new Date()
-    let hour = String(now.getHours());
-    let min = String(now.getMinutes());
-    if (min.length < 2) {
-        min = "0" + min
-    }
-    return Number(hour + min);
-    //return 1810;
-}
-
-const nowYearMonthDate = function () {
-    // 返り値:現在の日付をNumber型の年月日にして返す
-    // 例: 現在の日付が2022/8/2ならnowYearMonthDate() -> 20220802
-    const today = new Date();
-    const year = String(today.getFullYear());
-    let month = String(today.getMonth() + 1);
-    if (month.length < 2) {
-        month = "0" + month
-    }
-    let date = String(today.getDate());
-    if (date.length < 2) {
-        date = "0" + date
-    }
-    return Number(year + month + date);
-}
-
-const numToTime = function (hourMin) {
-    // 引数:Number型の時分
-    // 引数を「x時x分」というString型で返す
-    // 例: nowToTime(935) -> 9時35分
-    const hour = Math.floor(hourMin / 100);
-    const min = hourMin % 100;
-    return String(hour) + "時" + String(min) + "分"
-}
-
 const judgeSpecialDays = function (yearMonthDate) {
     // 引数:Number型の年月日
     // バスがない日や補講日の特殊日かどうか判定
@@ -113,13 +75,15 @@ const futureMinamiBuses = function (judge, day, hourMin) {
     return []
 }
 
-const yearMonthDate = nowYearMonthDate();
+const yearMonthDate = sessionStorage.getItem("selectedDate");
 
 const judge = judgeSpecialDays(yearMonthDate);
 
 const hourMin = 300;
 
-const day = new Date().getDay();
+let date = new Date(yearMonthDate.slice(0,4)+"-"+yearMonthDate.slice(4,6)+"-"+yearMonthDate.slice(6));
+const day = date.getDay();
+document.getElementById("selectedDateDisplay").innerHTML = date.toDateString();
 
 const hinoBusList = futureMinamiBuses(judge, day, hourMin);
 
@@ -143,13 +107,13 @@ if (hinoBusList.length == 0) {
         let time_display = `
     <div class="row justify-content-center">
         <div class="col-2 col-sm-4 text-end">
-            <p id = "nextHinoHour" style="font-size: 4rem;">${hour}</p>
+            <p id = "nextHinoHour" style="font-size: 4rem; text-align: right;">${hour}</p>
         </div>
         <div class="col-1">
             <p id = "colonHino" style="font-size: 3.5rem;">:</p>
         </div>
         <div class="col-2 col-sm-4 text-start">
-            <p id = "nextHinoMinute" style="font-size: 4rem;">${minute}</p>
+            <p id = "nextHinoMinute" style="font-size: 4rem; text-align: left;">${minute}</p>
         </div>
     </div>
     `
