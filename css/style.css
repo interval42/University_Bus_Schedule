@@ -73,5 +73,13 @@ body {
 html {
     font-size: min(2.4vw, var(--max-font-size));
 }
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: #3265b1;
+}
   
   
