@@ -60,8 +60,18 @@ select {
   outline: none;
 }
 
-/* body {
-    font-family: kozuka-gothic-pro, sans-serif;
+body {
+    font-family: 'PingFang SC Regular', 'kozuka-gothic-pro', Microsoft Yahei, sans-serif;
     font-style: light;
     font-weight: 200;
-} */
+}
+
+:root {
+    --max-font-size: 22px;
+}
+  
+html {
+    font-size: min(2.4vw, var(--max-font-size));
+}
+  
+  
