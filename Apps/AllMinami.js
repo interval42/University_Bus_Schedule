@@ -108,13 +108,13 @@ if(minamiBusList.length == 0){
         let minute = minamiTime[i].slice(-2);
         let time_display = `
     <div class="row justify-content-center">
-        <div class="col-2 col-sm-4 text-end">
+        <div class="col-3 col-lg-2">
             <p id = "nextMinamiHour" style="font-size: 4rem; text-align: right;">${hour}</p>
         </div>
         <div class="col-1">
             <p id = "colonMinami" style="font-size: 3.5rem;">:</p>
         </div>
-        <div class="col-2 col-sm-4 text-start">
+        <div class="col-3 col-lg-2">
             <p id = "nextMinamiMinute" style="font-size: 4rem; text-align: left;">${minute}</p>
         </div>
     </div>
