@@ -8,7 +8,7 @@ const nowHourMin = function(){
     min = "0" + min
   }
   return Number(hour + min);
-  //return 800;
+  // return 800;
 }
 
 const nowYearMonthDate = function(){
@@ -60,25 +60,25 @@ const judgeSpecialDays = function(yearMonthDate){
   // 補講日の特殊日なら"1"を返す
   // バスがない日と補講日にも当てはまらなければ"2"を返す
 
-  noBusDate = [ 20221010,20221102,20221103,20221104,20221123,20221229,20221230,20230102,20230103,20230109,20230113,20230117,]
-
-  makeUpDate = [20221222,20221227,20221228,20230213,20230214,20230215]
-
-  if(yearMonthDate >= 20230216 && yearMonthDate<=20230331){
+  if(yearMonthDate >= 20230915 || yearMonthDate <= 20230404){
     return "0";
   }
 
-  for(let i = 0; i<noBusDate.length; i++){
-    if (yearMonthDate == noBusDate[i]){
-      return "0";
-    }
+  noBusDate = [ 20230503,20230504,20230505,20230717]
+  if (noBusDate.includes(yearMonthDate)){
+    console.log("special day")
+    return "0";
   }
 
-  for(let i = 0; i<makeUpDate.length; i++){
-    if (yearMonthDate == makeUpDate[i]){
+  if(yearMonthDate >= 20230807 && yearMonthDate <= 20230915){
+    if(yearMonthDate >= 20230811 && yearMonthDate <= 20230903){
+      return "0";
+    }
+    else{
       return "1";
     }
   }
+
   return "2"
 }
 
@@ -86,17 +86,15 @@ const futureHinoBuses = function(judge, day, hourMin){
   // 引数:judgeSpecialDays関数の返り値, Number型の曜日, Number型の時分
   // 返り値:hourMin以降の日野のバススケジュールの配列
 
-  const makeupFromHino = [835,950,1220,1350,1520,1630,1830];
-  const normalFromHino = [750,835,910,950,1030,1220,1300,1350,1435,1520,1620,1630,1800,1830];
-  const wedFromHino = [750,835,840,910,945,950,1030,1055,1220,1250,1300,1350,1435,1440,1520,1620,1630,1800,1805,1830];
-  const thuFromHino = [750,835,910,950,1030,1220,1250,1300,1350,1435,1440,1520,1620,1630,1800,1805,1830];
-
+  const makeupFromHino = [840,950,1220,1350,1520,1630,1830];
+  const normalFromHino = [750,840,910,950,1030,1220,1300,1350,1440,1520,1620,1630,1805,1830];
+  
   if(judge == "0"){
     return [];
   }
 
   if(judge == "1"){
-    for(let i; i < makeupFromHino.length; i++){
+    for(let i = 0; i < makeupFromHino.length; i++){
       if(hourMin <= makeupFromHino[i]){
         return makeupFromHino.slice(i)
       }
@@ -104,21 +102,7 @@ const futureHinoBuses = function(judge, day, hourMin){
   }
 
   if(judge == "2"){
-    if(day == 3){
-      for(let i = 0; i < wedFromHino.length; i++){
-        if(hourMin <= wedFromHino[i]){
-          return wedFromHino.slice(i)
-        }
-      }
-    }
-    if(day == 4){
-      for(let i = 0; i < thuFromHino.length; i++){
-        if(hourMin <= thuFromHino[i]){
-          return thuFromHino.slice(i)
-        }
-      }
-    }
-    if(day == 1 || day == 2 || day == 5){
+    if(day !== 6 && day !== 7){
       for(let i = 0; i < normalFromHino.length; i++){
         if(hourMin <= normalFromHino[i]){
           return normalFromHino.slice(i)
@@ -134,11 +118,9 @@ const futureMinamiBuses = function(judge, day, hourMin){
   // 引数:judgeSpecialDays関数の返り値, Number型の曜日, Number型の時分
   // 返り値:hourMin以降の南大沢のバススケジュールの配列
 
-  const makeupFromMinami = [745,910,1020,1300,1440,1555,1730];
-  const normalFromMinami = [745,840,910,950,1020,1210,1300,1350,1440,1525,1555,1710,1730,1845];
-  const wedFromMinami = [740,745,840,910,915,950,1020,1025,1210,1215,1300,1345,1350,1440,1525,1530,1555,1700,1710,1730,1845];
-  const thuFromMinami = [745,840,910,950,1020,1210,1215,1300,1345,1350,1440,1525,1530,1555,1700,1710,1730,1845];
-
+  const makeupFromMinami = [745,920,1030,1300,1440,1555,1730];
+  const normalFromMinami = [745,840,920,950,1030,1230,1300,1350,1440,1530,1555,1700,1730,1845];
+  
   if(judge == "0"){
     return [];
   }
@@ -152,21 +134,7 @@ const futureMinamiBuses = function(judge, day, hourMin){
   }
 
   if(judge == "2"){
-    if(day == 3){
-      for(let i = 0; i < wedFromMinami.length; i++){
-        if(hourMin <= wedFromMinami[i]){
-          return wedFromMinami.slice(i)
-        }
-      }
-    }
-    if(day == 4){
-      for(let i = 0; i < thuFromMinami.length; i++){
-        if(hourMin <= thuFromMinami[i]){
-          return thuFromMinami.slice(i)
-        }
-      }
-    }
-    if(day == 1 || day == 2 || day == 5){
+    if(day !== 6 || day !== 7){
       for(let i = 0; i < normalFromMinami.length; i++){
         if(hourMin <= normalFromMinami[i]){
           return normalFromMinami.slice(i)
@@ -178,11 +146,12 @@ const futureMinamiBuses = function(judge, day, hourMin){
   return []
 }
 
-
+//export {futureHinoBuses,futureMinamiBuses};
 /*----------------------------------------------------------------------------- */
 
 
 const yearMonthDate = nowYearMonthDate();
+// const yearMonthDate = 20230504;
 
 const judge = judgeSpecialDays(yearMonthDate);
 
