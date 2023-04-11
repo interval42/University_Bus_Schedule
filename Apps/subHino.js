@@ -101,7 +101,7 @@ const futureMinamiBuses = function(judge, day, hourMin){
   }
 
   if(judge == "2"){
-    if(day !== 6 && day !== 7){
+    if(day !== 6 && day !== 0){
       for(let i = 0; i < normalFromMinami.length; i++){
         if(hourMin <= normalFromMinami[i]){
           return normalFromMinami.slice(i)
