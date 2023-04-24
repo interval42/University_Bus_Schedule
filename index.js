@@ -105,7 +105,7 @@ const futureHinoBuses = function(judge, day, hourMin){
   }
 
   if(judge == "2"){
-    if(day !== 6 || day !== 7){
+    if(day !== 6 && day !== 0){
       for(let i = 0; i < normalFromHino.length; i++){
         if(hourMin <= normalFromHino[i]){
           return normalFromHino.slice(i)
