@@ -86,7 +86,7 @@ const futureMinamiBuses = function(judge, day, hourMin){
   // 返り値:hourMin以降の南大沢のバススケジュールの配列
 
   const makeupFromMinami = [745,920,1030,1300,1440,1555,1730];
-  const normalFromMinami = [745,840,920,950,1030,1230,1300,1350,1440,1530,1555,1700,1730,1845];
+  const normalFromMinami = [745,840,920,950,1030,1220,1300,1350,1440,1530,1555,1700,1730,1845];
   
   if(judge == "0"){
     return [];
