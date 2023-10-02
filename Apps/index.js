@@ -120,6 +120,7 @@ const findNextBus = function(hourMin, schedule){
       return schedule.slice(i)
     }
   }
+  return [];
 }
 
 const nextBus = function(judge, day, hourMin, schedule){
