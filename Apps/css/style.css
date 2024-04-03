@@ -18,6 +18,48 @@
     min-height: 90vh;
 }
 
+#SelectDate {
+    min-height: 90vh;
+}
+
+#PlaceHolder {
+    min-height: 10vh;
+}
+
+#DecideButton {
+    min-height: 10vh;
+}
+
+#card-parent{
+    display: flex;
+    justify-content: space-between;
+}
+
+#card-body{
+    color: #fff;
+    border: solid 1px #fff;
+    text-align: center;
+    line-height: 100px;
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+   }
+
+#container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+select {
+  background-color: #81C7D4;
+  border: none;
+  color: black;
+  font-size: 1.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  outline: none;
+}
+
 body {
     font-family: 'PingFang SC Regular', 'kozuka-gothic-pro', Microsoft Yahei, sans-serif;
     font-style: light;
@@ -30,6 +72,14 @@ body {
   
 html {
     font-size: min(2.4vw, var(--max-font-size));
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: #3265b1;
 }
   
   

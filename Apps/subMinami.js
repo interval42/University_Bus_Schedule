@@ -1,3 +1,55 @@
+//Scheduled date for 1st semester 2024
+
+const semesterStartDay = 20240403;
+const semesterEndDay = 20240913;
+const holidaysDate = [20240429,20240503,20240506,
+                    20240812,20240813,20240814,20240815,20240816,
+                    20240819,20240820,20240821,20240822,20240823,
+                    20240826,20240827,20240828,20240829,20240830];
+const makeupDate = [20240806,20240807,20240808,20240800,
+                    20240902,20240903,20240904,20240905,20240906,
+                    20240909,20240910,20240911,20240912,20240913];
+
+//General Schedule for 1st semester each year
+
+const scheduleToMinamiosawa = {
+  Monday:     [750,840,910,950,1040,1220,1300,1350,1440,1520,1620,1630,1805,1830],
+  Tuesday:    [750,840,910,950,1040,1220,1300,1350,1440,1520,1620,1630,1805,1830],
+  Wednesday:  [750,840,910,950,1040,1220,1300,1350,1440,1520,1620,1630,1805,1830],
+  Thursday:   [750,840,910,950,1040,1220,1300,1350,1440,1520,1620,1630,1805,1830],
+  Friday:     [750,840,910,950,1040,1220,1300,1350,1440,1520,1620,1630,1805,1830],
+  MakeUpDay:  [840,950,1220,1350,1520,1630,1830]
+}
+
+const scheduleToHino = {
+  Monday:     [745,840,920,950,1040,1220,1300,1350,1440,1530,1555,1700,1730,1845],
+  Tuesday:    [745,840,920,950,1040,1220,1300,1350,1440,1530,1555,1700,1730,1845],
+  Wednesday:  [745,840,920,950,1040,1220,1300,1350,1440,1530,1555,1700,1730,1845],
+  Thursday:   [745,840,920,950,1040,1220,1300,1350,1440,1530,1555,1700,1730,1845],
+  Friday:     [745,840,920,950,1040,1220,1300,1350,1440,1530,1555,1700,1730,1845],
+  MakeUpDay:  [745,920,1040,1300,1440,1555,1730]
+}
+
+//General Schedule for 2nd semester each year
+
+// const scheduleToMinamiosawa = {
+//   Monday:     [750,835,910,950,1030,1220,1300,1350,1435,1520,1620,1630,1800,1830],
+//   Tuesday:    [750,835,910,950,1030,1220,1300,1350,1435,1520,1620,1630,1800,1830],
+//   Wednesday:  [750,835,840,910,945,950,1030,1055,1220,1250,1300,1350,1435,1440,1520,1620,1630,1800,1805,1830],
+//   Thursday:   [750,835,910,950,1030,1220,1250,1300,1350,1435,1440,1520,1620,1630,1800,1805,1830],
+//   Friday:     [750,835,910,950,1030,1220,1300,1350,1435,1520,1620,1630,1800,1830],
+//   MakeUpDay:  [840,950,1220,1350,1520,1630,1830]
+// }
+
+// const scheduleToHino = {
+//   Monday:     [745,840,910,950,1030,1210,1300,1350,1440,1525,1555,1710,1730,1845],
+//   Tuesday:    [745,840,910,950,1030,1210,1300,1350,1440,1525,1555,1710,1730,1845],
+//   Wednesday:  [740,745,840,910,915,950,1025,1030,1210,1215,1300,1345,1350,1440,1525,1530,1555,1700,1710,1730,1845],
+//   Thursday:   [745,840,910,950,1030,1210,1215,1300,1345,1350,1440,1525,1530,1555,1700,1710,1730,1845],
+//   Friday:     [745,840,910,950,1030,1210,1300,1350,1440,1525,1555,1710,1730,1845],
+//   MakeUpDay:  [745,910,1030,1300,1440,1555,1730]
+// }
+
 const nowHourMin = function(){
   // 返り値:現在時刻をNumber型の時分にして返す
   // 例: 現在時刻が13時45分ならnowHourMin() -> 1345
@@ -54,76 +106,77 @@ const timeSubtract = function(hourMin1, hourMin2){
 } 
 
 const judgeSpecialDays = function(yearMonthDate){
-  // 引数:Number型の年月日
-  // バスがない日や補講日の特殊日かどうか判定
-  // バスがない日の特殊日なら"0"を返す
-  // 補講日の特殊日なら"1"を返す
-  // バスがない日と補講日にも当てはまらなければ"2"を返す
+  /*
+  yearMonthDate: YYYYMMDD in number format
 
-  noBusDate = [ 20221010,20221102,20221103,20221104,20221123,20221229,20221230,20230102,20230103,20230109,20230113,20230117,]
+  return values:
+    0: days with no bus or not in current semester
+    1: days that belongs to "Make-up days"
+    2: any other normal days (weekends are not judged here)
+  */
 
-  makeUpDate = [20221222,20221227,20221228,20230213,20230214,20230215]
-
-  if(yearMonthDate >= 20230216 && yearMonthDate<=20230331){
+  //judge if the date is outside the time span of current semester
+  if(yearMonthDate > semesterEndDay || yearMonthDate < semesterStartDay){
     return "0";
   }
 
-  for(let i = 0; i<noBusDate.length; i++){
-    if (yearMonthDate == noBusDate[i]){
-      return "0";
-    }
+  //judge if the date is public school holidays
+  if (holidaysDate.includes(yearMonthDate)){
+    return "0";
   }
 
-  for(let i = 0; i<makeUpDate.length; i++){
-    if (yearMonthDate == makeUpDate[i]){
-      return "1";
-    }
+  //judge if the date is "Make-up days"
+  if(makeupDate.includes(yearMonthDate)){
+    return "1";
   }
+
+  //any other days
   return "2"
 }
 
-const futureHinoBuses = function(judge, day, hourMin){
+//A helper function to find subsequent buses on given schedule
+const findNextBus = function(hourMin, schedule){
+  for(let i = 0; i < schedule.length; i++){
+    if(hourMin <= schedule[i]){
+      return schedule.slice(i)
+    }
+  }
+  return [];
+}
+
+const nextBus = function(judge, day, hourMin, schedule){
   // 引数:judgeSpecialDays関数の返り値, Number型の曜日, Number型の時分
   // 返り値:hourMin以降の日野のバススケジュールの配列
+  /*
+  Parameters:
+  judge:    return value from judgeSpecialDays
+  day:      day of the week in number format
+  hourMin:  hour and minute in number format
 
-  const makeupFromHino = [835,950,1220,1350,1520,1630,1830];
-  const normalFromHino = [750,835,910,950,1030,1220,1300,1350,1435,1520,1620,1630,1800,1830];
-  const wedFromHino = [750,835,840,910,945,950,1030,1055,1220,1250,1300,1350,1435,1440,1520,1620,1630,1800,1805,1830];
-  const thuFromHino = [750,835,910,950,1030,1220,1250,1300,1350,1435,1440,1520,1620,1630,1800,1805,1830];
-
+  Return Value:
+  array of subsequent buses
+  */
+  
   if(judge == "0"){
     return [];
   }
 
   if(judge == "1"){
-    for(let i; i < makeupFromHino.length; i++){
-      if(hourMin <= makeupFromHino[i]){
-        return makeupFromHino.slice(i)
-      }
-    }
+    return findNextBus(hourMin,schedule.MakeUpDay)
   }
 
   if(judge == "2"){
-    if(day == 3){
-      for(let i = 0; i < wedFromHino.length; i++){
-        if(hourMin <= wedFromHino[i]){
-          return wedFromHino.slice(i)
-        }
-      }
-    }
-    if(day == 4){
-      for(let i = 0; i < thuFromHino.length; i++){
-        if(hourMin <= thuFromHino[i]){
-          return thuFromHino.slice(i)
-        }
-      }
-    }
-    if(day == 1 || day == 2 || day == 5){
-      for(let i = 0; i < normalFromHino.length; i++){
-        if(hourMin <= normalFromHino[i]){
-          return normalFromHino.slice(i)
-        }
-      }
+    switch(day){
+      case 1:
+        return findNextBus(hourMin,schedule.Monday)
+      case 2:
+        return findNextBus(hourMin,schedule.Tuesday)
+      case 3:
+        return findNextBus(hourMin,schedule.Wednesday)
+      case 4:
+        return findNextBus(hourMin,schedule.Thursday)
+      case 5:
+        return findNextBus(hourMin,schedule.Friday)
     }
   }
 
@@ -135,17 +188,15 @@ const futureHinoBuses = function(judge, day, hourMin){
 
 
 const yearMonthDate = nowYearMonthDate();
-console.log("yearMonthDate : " + String(yearMonthDate))
 
 const judge = judgeSpecialDays(yearMonthDate);
-console.log("judge : " + judge)
 
 setInterval(()=>{
   const hourMin = nowHourMin();
 
   const day = new Date().getDay();
 
-  const minamiBusList =  futureHinoBuses(judge, day, hourMin);
+  const minamiBusList =  nextBus(judge, day, hourMin, scheduleToMinamiosawa);
 
   //8:35のような時刻を08:35にして表示するための変換
   minamiTime=[];
@@ -171,7 +222,7 @@ setInterval(()=>{
   if(minamiBusList.length == 1){
     document.getElementById("nextMinamiCountdown1").innerHTML = "最終便となります";
   }
-  else{
+  else if (minamiBusList.length >= 2){
     document.getElementById("divider1").innerHTML = "=====";
     document.getElementById("nextMinamiHour1").innerHTML = minamiTime[1].slice(0,2);
     document.getElementById("colonMinami1").innerHTML = ":";

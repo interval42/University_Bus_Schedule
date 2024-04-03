@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <title>TMU Bus Schedule</title>
+</head>
+
+<body>
+
+  <nav id="Home" class="navbar brand" style="background-color:#255359;">
+    <div class="container">
+      <a class="navbar-brand pl-3" href="index.html" style="font-size: 3rem;">Home</a>
+
+      <!-- <a class="navbar-brand pl-3" style="cursor: pointer; font-size: 3rem;" onclick="clickDisplayAlert()">検索</a> -->
+      <script>
+        function clickDisplayAlert() {
+          let select = document.querySelector('[name="where"]');
+          if (select.selectedIndex === 0) {
+            location.href = 'AllHino.html';
+          } else {
+            location.href = "AllMinami.html";
+          }
+        }
+      </script>
+
+    </div>
+  </nav>
+
+  <div id="SelectDate" class="container-fluid text-center" style="background-color:#66bab7;">
+    <div id="PlaceHolder" class="row"></div>
+    <div class="row">
+      <div class="col-6 col-lg-6">
+        <p style="font-size: 3rem;">日付</p>
+        <select name="year" id="id_year" style="width:7rem; height:4rem; font-size: 1.3rem; text-align: center;">
+        </select>
+        <select name="month" id="id_month" style="width:5rem; height:4rem; font-size: 1.3rem; text-align: left;">
+        </select>
+        <select name="day" id="id_day" style="width:5rem; height:4rem; font-size: 1.3rem; text-align: left;">
+        </select>
+        <script>
+          (function () {
+            'use strict';
+
+            /*今日の日付データを変数todayに格納*/
+            var optionLoop, this_day, this_month, this_year, today;
+            today = new Date();
+            this_year = today.getFullYear();
+            this_month = today.getMonth() + 1;
+            this_day = today.getDate();
+
+            /*ループ処理（スタート数字、終了数字、表示id名、デフォルト数字）*/
+            optionLoop = function (start, end, id, this_day) {
+              var i, opt;
+              opt = null;
+              for (i = start; i <= end; i++) {
+                if (i === this_day) {
+                  opt += "<option value='" + i + "' selected>" + i + "</option>";
+                } else {
+                  opt += "<option value='" + i + "'>" + i + "</option>";
+                }
+              }
+              return document.getElementById(id).innerHTML = opt;
+            };
+
+            /*関数設定（スタート数字[必須]、終了数字[必須]、表示id名[省略可能]、デフォルト数字[省略可能]）*/
+            optionLoop(this_year, this_year + 1, 'id_year', this_year);
+            optionLoop(1, 12, 'id_month', this_month);
+            optionLoop(1, 31, 'id_day', this_day);
+
+
+          })();
+
+        </script>
+      </div>
+      <div class="col-6  col-lg-6">
+        <p style="font-size: 3rem;">行き先</p>
+        <form method="post">
+          <div>
+            <select name="where" style="width:17rem; height:4rem; font-size: 1.3rem; text-align: center;">
+              <option value="goHino">南大沢→日野</option>
+              <option value="goMinami">日野→南大沢</option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="PlaceHolder" class="row"></div>
+    <div class="row justify-content-center">
+      <div class="col-3 rounded" style="cursor: pointer; font-size: 2.5rem; background-color:#81C7D4;"
+        onclick="clickDisplayAlert()">検索</div>
+      <script>
+        function recordSelectedDate(){
+          let selectedYear = document.getElementById("id_year").value;
+            let selectedMonth = document.getElementById("id_month").value;
+            let selectedDay = document.getElementById("id_day").value;
+
+            if (selectedMonth.length < 2) {
+              selectedMonth = "0" + selectedMonth
+            }
+            if (selectedDay.length < 2) {
+              selectedDay = "0" + selectedDay
+            }          
+            sessionStorage.setItem("selectedDate", Number(selectedYear+selectedMonth+selectedDay));    
+        }
+        function clickDisplayAlert() {
+          let select = document.querySelector('[name="where"]');
+          if (select.selectedIndex === 0) {
+            recordSelectedDate()
+            location.href = 'AllHino.html';
+          } else {
+            recordSelectedDate()
+            location.href = "AllMinami.html";
+          }
+        }
+      </script>
+    </div>
+  </div>
+
+  <!-- <nav id = "DecideButton" class="card text-center rounded-0" style="background-color:#255359;">
+    <div class="card-body">
+      <p style="margin: auto; cursor: pointer; font-size: 3rem;" onclick="clickDisplayAlert()">検索</p>
+    </div>
+
+    <script>
+      function clickDisplayAlert() {
+        let select = document.querySelector('[name="where"]');
+        if(select.selectedIndex === 0) {
+          location.href = 'AllHino.html';
+        } else {
+          location.href = "AllMinami.html";
+        }
+      }
+    </script> 
+  </nav> -->
+
+
+  <!-- <script src="index.js"></script> -->
+
+</body>
+
+</html>
