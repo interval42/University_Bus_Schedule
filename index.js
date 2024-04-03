@@ -95,7 +95,7 @@ const judgeSpecialDays = function(yearMonthDate){
   */
 
   //judge if the date is outside the time span of current semester
-  if(yearMonthDate > semesterEndDay || yearMonthDate < semesterStartDay){
+  if(yearMonthDate > semesterEndDay && yearMonthDate < semesterStartDay){
     return "0";
   }
 
