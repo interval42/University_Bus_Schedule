@@ -45,61 +45,6 @@ const scheduleToHino = {
   MakeUpDay:  [745,910,1030,1300,1440,1555,1730]
 }
 
-const nowHourMin = function(){
-  // 返り値:現在時刻をNumber型の時分にして返す
-  // 例: 現在時刻が13時45分ならnowHourMin() -> 1345
-  const now = new Date()
-  let hour = String(now.getHours());
-  let min = String(now.getMinutes());
-  if(min.length < 2){
-    min = "0" + min
-  }
-  return Number(hour + min);
-  //return 1800;
-}
-
-const nowYearMonthDate = function(){
-  // 返り値:現在の日付をNumber型の年月日にして返す
-  // 例: 現在の日付が2022/8/2ならnowYearMonthDate() -> 20220802
-  const today = new Date();
-  const year = String(today.getFullYear());
-  let month = String(today.getMonth()+1);
-  if(month.length < 2){
-    month = "0" + month
-  }
-  let date = String(today.getDate());
-  if(date.length < 2){
-    date = "0" + date
-  }
-  return Number(year + month + date);
-}
-
-const numToTime = function(hourMin){
-  // 引数:Number型の時分
-  // 引数を「x時x分」というString型で返す
-  // 例: nowToTime(935) -> 9時35分
-  const hour = Math.floor(hourMin / 100);
-  const min = hourMin % 100;
-  return String(hour) + "時" + String(min) + "分"
-}
-
-const timeSubtract = function(hourMin1, hourMin2){
-  // 引数:Number型の時分
-  // 返り値:「２つの引数の時間差をx時間x分」または「x分」という形で返す
-  // 例: timeSubtract(713,845) -> 1時間32分
-  const min1 = Math.floor((hourMin1 / 100)) * 60 + (hourMin1 % 100);
-  const min2 = Math.floor((hourMin2 / 100)) * 60 + (hourMin2 % 100);
-
-  const diffHour = Math.floor((min1 - min2) / 60);
-  const diffMin = (min1 - min2) % 60;
-
-  if(diffHour == 0){
-    return String(diffMin) + "分"
-  }
-
-  return String(diffHour) + "時間" + String(diffMin) + "分"
-} 
-
 const judgeSpecialDays = function(yearMonthDate){
   /*
   yearMonthDate: YYYYMMDD in number format
@@ -179,61 +124,52 @@ const nextBus = function(judge, day, hourMin, schedule){
 }
 
 
-/*----------------------------------------------------------------------------- */
+const yearMonthDate = sessionStorage.getItem("selectedDate");
 
+const judge = judgeSpecialDays(parseInt(yearMonthDate));
 
-const yearMonthDate = nowYearMonthDate();
+const hourMin = 300;
 
-const judge = judgeSpecialDays(yearMonthDate);
+let date = new Date(yearMonthDate.slice(0,4)+"-"+yearMonthDate.slice(4,6)+"-"+yearMonthDate.slice(6));
+const day = date.getDay();
+document.getElementById("selectedDateDisplay").innerHTML = date.toDateString();
 
-setInterval(()=>{
-  const hourMin = nowHourMin();
+const minamiBusList = nextBus(judge, day, hourMin, scheduleToMinamiosawa);
 
-  const day = new Date().getDay();
-
-  const minamiBusList =  nextBus(judge, day, hourMin, scheduleToMinamiosawa);
-
-  //8:35のような時刻を08:35にして表示するための変換
-  minamiTime=[];
-  for (let i = 0; i < minamiBusList.length; i++){
-    if (minamiBusList[i] < 1000){
-      minamiTime[i] = "0" + minamiBusList[i].toString();
-    }
-    else{
-      minamiTime[i] = minamiBusList[i].toString()
-    }
-  }
-
-  if(minamiBusList.length == 0){
-    document.getElementById("nextMinamiCountdown").innerHTML = "本日のバスはもうありません";
+//8:35のような時刻を08:35にして表示するための変換
+minamiTime=[];
+for (let i = 0; i < minamiBusList.length; i++){
+  if (minamiBusList[i] < 1000){
+    minamiTime[i] = "0" + minamiBusList[i].toString();
   }
   else{
-    document.getElementById("nextMinamiHour").innerHTML = minamiTime[0].slice(0,2);
-    document.getElementById("colonMinami").innerHTML = ":";
-    document.getElementById("nextMinamiMinute").innerHTML = minamiTime[0].slice(-2);
-    document.getElementById("nextMinamiCountdown").innerHTML = "あと" + timeSubtract(minamiBusList[0],hourMin);
+    minamiTime[i] = minamiBusList[i].toString()
   }
+}
 
-  if(minamiBusList.length == 1){
-    document.getElementById("nextMinamiCountdown1").innerHTML = "最終便となります";
+if(minamiBusList.length == 0){
+    document.getElementById("minamiJudge").innerHTML = "この日はバスが運行していません";
   }
-  else if (minamiBusList.length >= 2){
-    document.getElementById("divider1").innerHTML = "=====";
-    document.getElementById("nextMinamiHour1").innerHTML = minamiTime[1].slice(0,2);
-    document.getElementById("colonMinami1").innerHTML = ":";
-    document.getElementById("nextMinamiMinute1").innerHTML = minamiTime[1].slice(-2);
-    document.getElementById("nextMinamiCountdown1").innerHTML = "あと" + timeSubtract(minamiBusList[1],hourMin);
+  else{
+    document.getElementById("minamiJudge").innerHTML = "この日のバス";
+    for (let i = 0; i < minamiTime.length; i++) {
+        let hour = minamiTime[i].slice(0, 2);
+        let minute = minamiTime[i].slice(-2);
+        let time_display = `
+    <div class="row justify-content-center">
+        <div class="col-3 col-lg-2">
+            <p id = "nextMinamiHour" style="font-size: 4rem; text-align: right;">${hour}</p>
+        </div>
+        <div class="col-1">
+            <p id = "colonMinami" style="font-size: 3.5rem;">:</p>
+        </div>
+        <div class="col-3 col-lg-2">
+            <p id = "nextMinamiMinute" style="font-size: 4rem; text-align: left;">${minute}</p>
+        </div>
+    </div>
+    `
+        //let time_display = '<p>test</p>'
+        let timeContainer = document.getElementById("timeContainer");
+        timeContainer.innerHTML += time_display;
+    }
   }
-
-  if(minamiBusList.length == 2){
-    document.getElementById("nextMinamiCountdown2").innerHTML = "最終便となります";
-  }
-  else if (minamiBusList.length >= 3){
-    document.getElementById("divider2").innerHTML = "=====";
-    document.getElementById("nextMinamiHour2").innerHTML = minamiTime[2].slice(0,2);
-    document.getElementById("colonMinami2").innerHTML = ":";
-    document.getElementById("nextMinamiMinute2").innerHTML = minamiTime[2].slice(-2);
-    document.getElementById("nextMinamiCountdown2").innerHTML = "あと" + timeSubtract(minamiBusList[2],hourMin);
-  }
-
-},1);

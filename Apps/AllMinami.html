@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <title>TMU Bus Schedule</title>
+</head>
+
+<body>
+  
+
+  <nav id = "Home" class="navbar brand" style="background-color:#255359;">
+    <div class="container">
+      <a class="navbar-brand pl-3" href="index.html" style="font-size: 3rem;">Home</a>
+      <a class="navbar-brand pl-3" href="select.html" style="font-size: 3rem;">戻る</a>
+    </div>
+  </nav>
+
+  <div id = "MinamiSub" class="card text-center rounded-0" style="background-color:#81C7D4;">
+    <div class="card-body">
+      <p class="card-title" style="font-size: 4rem;">日野 ⇒ 南大沢</p>
+      <p id="selectedDateDisplay" class="card-text" style="font-size: 2rem;"></p>
+      <p id="minamiJudge" class="card-text" style="font-size: 2rem;"></p>
+
+      <div id="timeContainer"></div>
+      
+    </div>
+  </div>
+
+  <script src="AllMinami.js"></script>
+
+</body>
+
+</html>
