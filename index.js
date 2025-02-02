@@ -1,6 +1,3 @@
-//git subtree push --prefix Apps origin gh-pages
-
-
 //Scheduled date for 2nd semester 2024
 
 const semesterStartDay = 20241001;
